@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 package com.example.Task_Management_System.exception;
+=======
+package com.toda.ToDo_Service.exception;
+>>>>>>> a736555 (create task API)
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
