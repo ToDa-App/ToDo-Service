@@ -1,8 +1,5 @@
 package com.toda.ToDo_Service.dto;
-<<<<<<< HEAD
 
-public class TaskRequest {
-=======
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotBlank;
@@ -44,5 +41,4 @@ public class TaskRequest {
         }
         return !completionDate.isBefore(startDate);
     }
->>>>>>> a736555 (create task API)
 }
