@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-package com.example.Task_Management_System.exception;
-=======
+
 package com.toda.ToDo_Service.exception;
->>>>>>> a736555 (create task API)
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -40,13 +37,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<ApiGenericResponse<Object>> handleInvalidFormat(HttpMessageNotReadableException ex) {
         String msg = ex.getCause() != null ? ex.getCause().getMessage() : ex.getMessage();
-<<<<<<< HEAD
-        if (msg != null && msg.contains("Frequency")) {
-            return ResponseEntity.badRequest()
-                    .body(ApiGenericResponse.error("Invalid frequency value. Allowed values are: DAILY, WEEKLY, MONTHLY."));
-        }
-=======
->>>>>>> a736555 (create task API)
         if (msg != null && msg.contains("Date")) {
             return ResponseEntity.badRequest()
                     .body(ApiGenericResponse.error("Invalid date format. Please use yyyy-MM-dd."));
