@@ -1,6 +1,7 @@
 package com.toda.ToDo_Service.controller;
 
 import com.toda.ToDo_Service.dto.PagedResponse;
+import com.toda.ToDo_Service.dto.TaskDetailsResponse;
 import com.toda.ToDo_Service.dto.TaskRequest;
 import com.toda.ToDo_Service.dto.TaskSummaryResponse;
 import com.toda.ToDo_Service.entity.Task;
@@ -44,5 +45,13 @@ public class TaskController {
         String message = onePage.isEmpty() ? "No tasks found" : "Tasks retrieved successfully";
         return ResponseEntity.ok(ApiGenericResponse.success(message, pagedResponse));
 
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<ApiGenericResponse<TaskDetailsResponse>> getTaskById(
+            @PathVariable Long id,
+            Authentication authentication) {
+        String userEmail = authentication.getName();
+        TaskDetailsResponse taskDetails = taskService.getTaskDetailsById(id, userEmail);
+        return ResponseEntity.ok(ApiGenericResponse.success("Task retrieved successfully", taskDetails));
     }
 }

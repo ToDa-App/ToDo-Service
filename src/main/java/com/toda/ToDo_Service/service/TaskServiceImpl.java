@@ -1,5 +1,6 @@
 package com.toda.ToDo_Service.service;
 
+import com.toda.ToDo_Service.dto.TaskDetailsResponse;
 import com.toda.ToDo_Service.dto.TaskRequest;
 import com.toda.ToDo_Service.dto.TaskSummaryResponse;
 import com.toda.ToDo_Service.entity.Task;
@@ -9,12 +10,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
-
+import org.springframework.web.server.ResponseStatusException;
 import java.time.LocalDate;
 import java.util.Optional;
-
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 @Service
 @RequiredArgsConstructor
 public class TaskServiceImpl implements TaskService{
@@ -38,7 +40,7 @@ public class TaskServiceImpl implements TaskService{
                 .deleted(false)
                 .build();
         Task task = Task.builder()
-                .userEmail(userEmail) // تم تعديله بدل userId
+                .userEmail(userEmail)
                 .title(request.getTitle())
                 .taskDetails(details)
                 .build();
@@ -68,5 +70,22 @@ public class TaskServiceImpl implements TaskService{
                 task.getTaskDetails().getPriority(),
                 task.getTaskDetails().getStatus()
         ));
+    }
+    public TaskDetailsResponse getTaskDetailsById(Long id, String userEmail) {
+        Task task = taskRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Task not found"));
+        if (!task.getUserEmail().equals(userEmail)) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Not authorized to access this task");
+        }
+        TaskDetails taskDetails = task.getTaskDetails();
+        return TaskDetailsResponse.builder()
+                .title(task.getTitle())
+                .description(taskDetails.getDescription())
+                .status(taskDetails.getStatus())
+                .priority(taskDetails.getPriority())
+                .startDate(taskDetails.getStartDate())
+                .dueDate(taskDetails.getDueDate())
+                .completionDate(taskDetails.getCompletionDate())
+                .build();
     }
 }
