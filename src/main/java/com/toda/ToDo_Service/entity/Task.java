@@ -13,7 +13,6 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(name = "user_email", nullable = false)
     private String userEmail;
     @Column(nullable = false)

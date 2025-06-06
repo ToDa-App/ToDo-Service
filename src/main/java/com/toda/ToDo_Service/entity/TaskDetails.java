@@ -21,7 +21,7 @@ public class TaskDetails {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Priority priority = Priority.MEDIUM;
-    private String description;
+    private String description="empty";
     private LocalDate startDate;
     private LocalDate dueDate;
     private LocalDate completionDate;
