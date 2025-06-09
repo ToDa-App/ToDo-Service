@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import java.time.LocalDate;
@@ -22,8 +23,7 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 public class TaskServiceImpl implements TaskService{
     private final TaskRepository taskRepository;
     @Override
-    public Task createTask(TaskRequest request, Authentication authentication) {
-        String userEmail = authentication.getName();
+    public Task createTask(TaskRequest request, String userEmail) {
         if (request.getStartDate() == null) {
             request.setStartDate(LocalDate.now());
         }

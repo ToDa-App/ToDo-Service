@@ -11,7 +11,7 @@ import org.springframework.security.core.Authentication;
 import java.util.Optional;
 
 public interface TaskService {
-    Task createTask(TaskRequest request, Authentication authentication);
+    Task createTask(TaskRequest request, String userEmail);
     Page<TaskSummaryResponse> getTasks(String userEmail, Optional<Integer> pageOpt, Optional<TaskDetails.Status> statusOpt, Optional<TaskDetails.Priority> priorityOpt);
     TaskDetailsResponse getTaskDetailsById(Long id, String userEmail);
 }

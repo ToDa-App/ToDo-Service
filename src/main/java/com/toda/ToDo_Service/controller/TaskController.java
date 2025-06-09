@@ -10,7 +10,6 @@ import com.toda.ToDo_Service.exception.ApiGenericResponse;
 import com.toda.ToDo_Service.service.TaskService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.validation.annotation.Validated;
@@ -25,13 +24,9 @@ public class TaskController {
     public ResponseEntity<ApiGenericResponse<Task>> createTask(
             @Validated(TaskRequest.OnCreate.class) @RequestBody TaskRequest request,
             Authentication authentication){
-        try {
-            Task task = taskService.createTask(request, authentication);
+        String userEmail = authentication.getName();
+            Task task = taskService.createTask(request, userEmail);
             return ResponseEntity.ok(ApiGenericResponse.success("Task created successfully", task));
-        } catch (Exception ex) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(ApiGenericResponse.error("Failed to create task: " + ex.getMessage()));
-        }
     }
     @GetMapping
     public ResponseEntity<ApiGenericResponse<PagedResponse<TaskSummaryResponse>>> getTasks(

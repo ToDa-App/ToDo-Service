@@ -14,7 +14,7 @@ public class TaskRequest {
     public interface OnCreate {}
     @NotBlank(message = "Title of task is required", groups = {OnCreate.class})
     private String title;
-    private String description;
+    private String description="Empty";
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate startDate;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
