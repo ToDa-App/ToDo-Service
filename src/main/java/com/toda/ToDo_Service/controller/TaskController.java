@@ -1,9 +1,6 @@
 package com.toda.ToDo_Service.controller;
 
-import com.toda.ToDo_Service.dto.PagedResponse;
-import com.toda.ToDo_Service.dto.TaskDetailsResponse;
-import com.toda.ToDo_Service.dto.TaskRequest;
-import com.toda.ToDo_Service.dto.TaskSummaryResponse;
+import com.toda.ToDo_Service.dto.*;
 import com.toda.ToDo_Service.entity.Task;
 import com.toda.ToDo_Service.entity.TaskDetails;
 import com.toda.ToDo_Service.exception.ApiGenericResponse;
@@ -48,5 +45,14 @@ public class TaskController {
         String userEmail = authentication.getName();
         TaskDetailsResponse taskDetails = taskService.getTaskDetailsById(id, userEmail);
         return ResponseEntity.ok(ApiGenericResponse.success("Task retrieved successfully", taskDetails));
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<ApiGenericResponse<Task>> updateTask(
+            @PathVariable Long id,
+            @RequestBody UpdateTaskRequest request,
+            Authentication authentication) {
+        String userEmail = authentication.getName();
+        Task updatedTask = taskService.updateTask(id, userEmail, request);
+        return ResponseEntity.ok(ApiGenericResponse.success("Task updated successfully", updatedTask));
     }
 }

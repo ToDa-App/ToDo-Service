@@ -3,6 +3,7 @@ package com.toda.ToDo_Service.service;
 import com.toda.ToDo_Service.dto.TaskDetailsResponse;
 import com.toda.ToDo_Service.dto.TaskRequest;
 import com.toda.ToDo_Service.dto.TaskSummaryResponse;
+import com.toda.ToDo_Service.dto.UpdateTaskRequest;
 import com.toda.ToDo_Service.entity.Task;
 import com.toda.ToDo_Service.entity.TaskDetails;
 import com.toda.ToDo_Service.repository.TaskRepository;
@@ -87,5 +88,29 @@ public class TaskServiceImpl implements TaskService{
                 .dueDate(taskDetails.getDueDate())
                 .completionDate(taskDetails.getCompletionDate())
                 .build();
+    }
+    public Task updateTask(Long id, String userEmail, UpdateTaskRequest request) {
+        Task task = taskRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Task not found"));
+        if (!task.getUserEmail().equals(userEmail)) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Not authorized to update this task");
+        }
+        if (request.getTitle() != null && !request.getTitle().isBlank()) {
+            task.setTitle(request.getTitle());
+        }
+        TaskDetails details = task.getTaskDetails();
+        if (request.getDescription() != null)
+            details.setDescription(request.getDescription());
+        if (request.getPriority() != null)
+            details.setPriority(TaskDetails.Priority.valueOf(request.getPriority()));
+        if (request.getStatus() != null)
+            details.setStatus(TaskDetails.Status.valueOf(request.getStatus()));
+        if (request.getStartDate() != null)
+            details.setStartDate(request.getStartDate());
+        if (request.getDueDate() != null)
+            details.setDueDate(request.getDueDate());
+        if (request.getCompletionDate() != null)
+            details.setCompletionDate(request.getCompletionDate());
+        return taskRepository.save(task);
     }
 }
