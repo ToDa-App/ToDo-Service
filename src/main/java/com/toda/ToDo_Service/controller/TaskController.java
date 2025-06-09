@@ -65,4 +65,13 @@ public class TaskController {
                 ApiGenericResponse.success("Task deleted successfully", null)
         );
     }
+    @PutMapping("/restore/{id}")
+    public ResponseEntity<ApiGenericResponse<Void>> restoreTask(
+            @PathVariable Long id,
+            Authentication authentication) {
+
+        String email = authentication.getName();
+        taskService.restoreTask(id, email);
+        return ResponseEntity.ok(ApiGenericResponse.success("Task restored successfully", null));
+    }
 }

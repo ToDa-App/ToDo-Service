@@ -127,4 +127,17 @@ public class TaskServiceImpl implements TaskService{
         task.getTaskDetails().setDeletedAt(LocalDateTime.now());
         taskRepository.save(task);
     }
+    public void restoreTask(Long id, String userEmail) {
+        Task task = taskRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Task not found"));
+        if (!task.getUserEmail().equals(userEmail)) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Not authorized to restore this task");
+        }
+        if (!task.getTaskDetails().isDeleted()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Task is not deleted");
+        }
+        task.getTaskDetails().setDeleted(false);
+        task.getTaskDetails().setDeletedAt(null);
+        taskRepository.save(task);
+    }
 }
