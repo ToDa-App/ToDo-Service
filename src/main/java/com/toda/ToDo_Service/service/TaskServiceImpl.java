@@ -73,7 +73,17 @@ public class TaskServiceImpl implements TaskService{
                 task.getTaskDetails().getStatus()
         ));
     }
-
+    public Page<TaskSummaryResponse> getDeletedTasks(String userEmail, Optional<Integer> pageOpt) {
+        int page = pageOpt.orElse(0);
+        int size = 5;
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Task> deletedTasks = taskRepository.findByUserEmailAndTaskDetails_DeletedTrue(userEmail, pageable);
+        return deletedTasks.map(task -> new TaskSummaryResponse(
+                task.getTitle(),
+                task.getTaskDetails().getPriority(),
+                task.getTaskDetails().getStatus()
+        ));
+    }
     public TaskDetailsResponse getTaskDetailsById(Long id, String userEmail) {
         Task task = taskRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Task not found"));

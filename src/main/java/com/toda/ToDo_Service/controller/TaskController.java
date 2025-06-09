@@ -25,8 +25,8 @@ public class TaskController {
             Task task = taskService.createTask(request, userEmail);
             return ResponseEntity.ok(ApiGenericResponse.success("Task created successfully", task));
     }
-    @GetMapping
-    public ResponseEntity<ApiGenericResponse<PagedResponse<TaskSummaryResponse>>> getTasks(
+    @GetMapping("/active")
+    public ResponseEntity<ApiGenericResponse<PagedResponse<TaskSummaryResponse>>> getActiveTasks(
             @RequestParam Optional<Integer> page,
             @RequestParam Optional<TaskDetails.Status> status,
             @RequestParam Optional<TaskDetails.Priority> priority,
@@ -36,7 +36,16 @@ public class TaskController {
         PagedResponse<TaskSummaryResponse> pagedResponse = new PagedResponse<>(onePage);
         String message = onePage.isEmpty() ? "No tasks found" : "Tasks retrieved successfully";
         return ResponseEntity.ok(ApiGenericResponse.success(message, pagedResponse));
-
+    }
+    @GetMapping("/deleted")
+    public ResponseEntity<ApiGenericResponse<PagedResponse<TaskSummaryResponse>>> getDeletedTasks(
+            @RequestParam Optional<Integer> page,
+            Authentication authentication) {
+        String userEmail = authentication.getName();
+        Page<TaskSummaryResponse> deletedTasks = taskService.getDeletedTasks(userEmail, page);
+        PagedResponse<TaskSummaryResponse> pagedResponse = new PagedResponse<>(deletedTasks);
+        String message = deletedTasks.isEmpty() ? "No Deleted tasks" : " Deleted Tasks retrieved successfully";
+        return ResponseEntity.ok(ApiGenericResponse.success(message, pagedResponse));
     }
     @GetMapping("/{id}")
     public ResponseEntity<ApiGenericResponse<TaskDetailsResponse>> getTaskById(

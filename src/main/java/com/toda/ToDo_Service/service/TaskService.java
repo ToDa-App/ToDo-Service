@@ -18,4 +18,5 @@ public interface TaskService {
     Task updateTask(Long id, String userEmail, UpdateTaskRequest request);
     void deleteTask(Long id, String userEmail);
     void restoreTask(Long id, String userEmail);
+    Page<TaskSummaryResponse> getDeletedTasks(String userEmail, Optional<Integer> pageOpt);
 }

@@ -14,5 +14,5 @@ public interface TaskRepository extends JpaRepository <Task, Long> {
     Page<Task> findByUserEmailAndTaskDetailsStatusAndTaskDetailsDeletedFalse(String userEmail, TaskDetails.Status status, Pageable pageable);
     Page<Task> findByUserEmailAndTaskDetailsPriorityAndTaskDetailsDeletedFalse(String userEmail, TaskDetails.Priority priority, Pageable pageable);
     Page<Task> findByUserEmailAndTaskDetailsStatusAndTaskDetailsPriorityAndTaskDetailsDeletedFalse(String userEmail, TaskDetails.Status status, TaskDetails.Priority priority, Pageable pageable);
-
+    Page<Task> findByUserEmailAndTaskDetails_DeletedTrue(String userEmail, Pageable pageable);
 }
