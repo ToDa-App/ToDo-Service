@@ -10,8 +10,9 @@ import java.util.Optional;
 
 
 public interface TaskRepository extends JpaRepository <Task, Long> {
-    Page<Task> findByUserEmail(String userEmail, Pageable pageable);
-    Page<Task> findByUserEmailAndTaskDetailsStatus(String userEmail, TaskDetails.Status status, Pageable pageable);
-    Page<Task> findByUserEmailAndTaskDetailsPriority(String userEmail, TaskDetails.Priority priority, Pageable pageable);
-    Page<Task> findByUserEmailAndTaskDetailsStatusAndTaskDetailsPriority(String userEmail, TaskDetails.Status status, TaskDetails.Priority priority, Pageable pageable);
+     Page<Task> findByUserEmailAndTaskDetailsDeletedFalse(String userEmail, Pageable pageable);
+    Page<Task> findByUserEmailAndTaskDetailsStatusAndTaskDetailsDeletedFalse(String userEmail, TaskDetails.Status status, Pageable pageable);
+    Page<Task> findByUserEmailAndTaskDetailsPriorityAndTaskDetailsDeletedFalse(String userEmail, TaskDetails.Priority priority, Pageable pageable);
+    Page<Task> findByUserEmailAndTaskDetailsStatusAndTaskDetailsPriorityAndTaskDetailsDeletedFalse(String userEmail, TaskDetails.Status status, TaskDetails.Priority priority, Pageable pageable);
+
 }

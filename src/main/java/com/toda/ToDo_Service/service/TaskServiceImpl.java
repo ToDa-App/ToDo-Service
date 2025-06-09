@@ -58,14 +58,14 @@ public class TaskServiceImpl implements TaskService{
         Pageable pageable = PageRequest.of(page, size);
         Page<Task> tasks;
         if (statusOpt.isPresent() && priorityOpt.isPresent()) {
-            tasks = taskRepository.findByUserEmailAndTaskDetailsStatusAndTaskDetailsPriority(
+            tasks = taskRepository.findByUserEmailAndTaskDetailsStatusAndTaskDetailsPriorityAndTaskDetailsDeletedFalse(
                     userEmail, statusOpt.get(), priorityOpt.get(), pageable);
         } else if (statusOpt.isPresent()) {
-            tasks = taskRepository.findByUserEmailAndTaskDetailsStatus(userEmail, statusOpt.get(), pageable);
+            tasks = taskRepository.findByUserEmailAndTaskDetailsStatusAndTaskDetailsDeletedFalse(userEmail, statusOpt.get(), pageable);
         } else if (priorityOpt.isPresent()) {
-            tasks = taskRepository.findByUserEmailAndTaskDetailsPriority(userEmail, priorityOpt.get(), pageable);
+            tasks = taskRepository.findByUserEmailAndTaskDetailsPriorityAndTaskDetailsDeletedFalse(userEmail, priorityOpt.get(), pageable);
         } else {
-            tasks = taskRepository.findByUserEmail(userEmail, pageable);
+            tasks = taskRepository.findByUserEmailAndTaskDetailsDeletedFalse(userEmail, pageable);
         }
         return tasks.map(task -> new TaskSummaryResponse(
                 task.getTitle(),
@@ -73,6 +73,7 @@ public class TaskServiceImpl implements TaskService{
                 task.getTaskDetails().getStatus()
         ));
     }
+
     public TaskDetailsResponse getTaskDetailsById(Long id, String userEmail) {
         Task task = taskRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(NOT_FOUND, "Task not found"));
