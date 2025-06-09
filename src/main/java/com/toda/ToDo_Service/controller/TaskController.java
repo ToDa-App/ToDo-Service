@@ -55,4 +55,14 @@ public class TaskController {
         Task updatedTask = taskService.updateTask(id, userEmail, request);
         return ResponseEntity.ok(ApiGenericResponse.success("Task updated successfully", updatedTask));
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ApiGenericResponse<Void>> deleteTask(
+            @PathVariable Long id,
+            Authentication authentication) {
+        String userEmail = authentication.getName();
+        taskService.deleteTask(id, userEmail);
+        return ResponseEntity.ok(
+                ApiGenericResponse.success("Task deleted successfully", null)
+        );
+    }
 }

@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 @Service
@@ -112,5 +113,18 @@ public class TaskServiceImpl implements TaskService{
         if (request.getCompletionDate() != null)
             details.setCompletionDate(request.getCompletionDate());
         return taskRepository.save(task);
+    }
+    public void deleteTask(Long id, String userEmail) {
+        Task task = taskRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Task not found"));
+        if (!task.getUserEmail().equals(userEmail)) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Not authorized to delete this task");
+        }
+        if (task.getTaskDetails().isDeleted()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Task is already deleted");
+        }
+        task.getTaskDetails().setDeleted(true);
+        task.getTaskDetails().setDeletedAt(LocalDateTime.now());
+        taskRepository.save(task);
     }
 }

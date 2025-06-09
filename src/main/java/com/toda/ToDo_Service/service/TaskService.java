@@ -16,4 +16,5 @@ public interface TaskService {
     Page<TaskSummaryResponse> getTasks(String userEmail, Optional<Integer> pageOpt, Optional<TaskDetails.Status> statusOpt, Optional<TaskDetails.Priority> priorityOpt);
     TaskDetailsResponse getTaskDetailsById(Long id, String userEmail);
     Task updateTask(Long id, String userEmail, UpdateTaskRequest request);
+    void deleteTask(Long id, String userEmail);
 }
