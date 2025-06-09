@@ -80,6 +80,9 @@ public class TaskServiceImpl implements TaskService{
         if (!task.getUserEmail().equals(userEmail)) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Not authorized to access this task");
         }
+        if (task.getTaskDetails().isDeleted()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "This task is deleted. Please restore it first.");
+        }
         TaskDetails taskDetails = task.getTaskDetails();
         return TaskDetailsResponse.builder()
                 .title(task.getTitle())
@@ -96,6 +99,9 @@ public class TaskServiceImpl implements TaskService{
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Task not found"));
         if (!task.getUserEmail().equals(userEmail)) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Not authorized to update this task");
+        }
+        if (task.getTaskDetails().isDeleted()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "This task is deleted. Please restore it first.");
         }
         if (request.getTitle() != null && !request.getTitle().isBlank()) {
             task.setTitle(request.getTitle());
