@@ -1,11 +1,13 @@
 package com.toda.ToDo_Service.dto;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.LocalDate;
 @Getter
 @Setter
+@Builder
 @Schema(name = "UpdateTaskRequest", description = "Request DTO for updating existing task details")
 public class UpdateTaskRequest {
     @Schema(description = "New task title", example = "Buy groceries")

@@ -2,15 +2,13 @@ package com.toda.ToDo_Service.dto;
 
 import com.toda.ToDo_Service.entity.TaskDetails;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Schema(name = "TaskSummaryResponse", description = "Response DTO summarizing key details of a task")
 public class TaskSummaryResponse {
     @Schema(description = "Task title", example = "Write report")
