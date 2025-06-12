@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8
+    container_name: todo-service-database
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: todoservicedb
+      MYSQL_USER: Habiba
+      MYSQL_PASSWORD: 1234
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  app:
+    build: .
+    container_name: todo-service
+    depends_on:
+      - mysql
+    ports:
+      - "8082:8082"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/todoservicedb
+      SPRING_DATASOURCE_USERNAME: Habiba
+      SPRING_DATASOURCE_PASSWORD: 1234
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      JWT_SECRET_KEY: 6pC9zB!rT@uX1#VmK$eDqL7nW2fYjA0h
+      JWT_EXPIRATION: 3600000
+    restart: always
+
+volumes:
+  mysql_data:
