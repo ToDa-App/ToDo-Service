@@ -1,0 +1,317 @@
+{
+	"info": {
+		"_postman_id": "3c287359-f4b2-4789-bb0c-c08c312d0df7",
+		"name": "ToDo-Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26746354",
+		"_collection_link": "https://speeding-shadow-941982.postman.co/workspace/ToDa-App~f099150b-25a5-49e6-bd54-c2060ee324ce/collection/26746354-3c287359-f4b2-4789-bb0c-c08c312d0df7?action=share&source=collection_link&creator=26746354"
+	},
+	"item": [
+		{
+			"name": "CreateTask",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWJpYmFhaG1lZGF0dGlhNUBnbWFpbC5jb20iLCJpYXQiOjE3NDkwODA0NTksImV4cCI6MTc0OTA4NDA1OX0._ZWPT_t-8AuZaoDEoK0q8AH4X9NWwnVgnoJmZPS6XkY",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Buy groceries\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/tasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetActiveTasks",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYTIwOTAyNDVAZ21haWwuY29tIiwiaWF0IjoxNzQ5NDkyOTcyLCJleHAiOjE3NDk0OTY1NzJ9.ujMN9LZ6mIERHjBYV_ayqbMwpNxOLpw-EIyHJhIAuXs",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/tasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"tasks"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "status",
+							"value": "PENDING",
+							"disabled": true
+						},
+						{
+							"key": "priority",
+							"value": "MEDIUM",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetDeletedTasks",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYTIwOTAyNDVAZ21haWwuY29tIiwiaWF0IjoxNzQ5NDkyOTcyLCJleHAiOjE3NDk0OTY1NzJ9.ujMN9LZ6mIERHjBYV_ayqbMwpNxOLpw-EIyHJhIAuXs",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/tasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetTaskByID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWJpYmFhaG1lZGF0dGlhNUBnbWFpbC5jb20iLCJpYXQiOjE3NDkwODY0NTMsImV4cCI6MTc0OTA5MDA1M30.ICBHxc_YuAxPxGft9NZ-b29lHAJBnjadnlwOsJXk4B4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/tasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"tasks"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "status",
+							"value": "PENDING",
+							"disabled": true
+						},
+						{
+							"key": "priority",
+							"value": "MEDIUM",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteTask",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYTIwOTAyNDVAZ21haWwuY29tIiwiaWF0IjoxNzQ5NDkzODE3LCJleHAiOjE3NDk0OTc0MTd9.P7rs8CQMbzCWrZCs_JepcNvYQ3EZR8G1hcsb_t44HGE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/tasks/11",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"tasks",
+						"11"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateTask",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYTIwOTAyNDVAZ21haWwuY29tIiwiaWF0IjoxNzQ5NDkyOTcyLCJleHAiOjE3NDk0OTY1NzJ9.ujMN9LZ6mIERHjBYV_ayqbMwpNxOLpw-EIyHJhIAuXs",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"habiba\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/tasks/11",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"tasks",
+						"11"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RestoreTask",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoYWJpYmFhaG1lZGF0dGlhMTBAZ21haWwuY29tIiwiaWF0IjoxNzQ5Nzk4NzYyLCJleHAiOjE3NDk4MDIzNjJ9.yyg5it3BuYZ_EDRIHPGIqG_lBmE4-q2zuHw9h9kZSj8",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"habiba\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/tasks/15",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"tasks",
+						"15"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
