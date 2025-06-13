@@ -279,3 +279,26 @@ All endpoints require JWT-based authentication. The authenticated user's email i
 ```
 
 ---
+
+```mermaid
+erDiagram
+    TASK_DETAILS ||--o| TASKS : has
+    TASK_DETAILS {
+        bigint id PK
+        date completion_date
+        bit deleted
+        datetime deleted_at
+        varchar description
+        date due_date
+        enum priority
+        date start_date
+        enum status
+    }
+    TASKS {
+        bigint id PK
+        varchar title
+        varchar user_email
+        bigint details_id FK
+    }
+```
+
