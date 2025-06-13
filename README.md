@@ -1,29 +1,9 @@
+
 # 📝 ToDo-Service
 
 **ToDo-Service** is a Spring Boot microservice that provides full task management functionality for authenticated users. The service supports task creation, update, soft deletion, restoration, and listing (active and deleted) with pagination and filtering.
 
 ---
-```mermaid
-erDiagram
-    TASK_DETAILS ||--o| TASKS : has
-    TASK_DETAILS {
-        bigint id PK
-        date completion_date
-        bit deleted
-        datetime deleted_at
-        varchar description
-        date due_date
-        enum priority
-        date start_date
-        enum status
-    }
-    TASKS {
-        bigint id PK
-        varchar title
-        varchar user_email
-        bigint details_id FK
-    }
-```
 ## 📦 Project Type
 
 - Microservices Architecture
