@@ -11,6 +11,7 @@ import lombok.*;
 @Builder
 @Schema(name = "TaskSummaryResponse", description = "Response DTO summarizing key details of a task")
 public class TaskSummaryResponse {
+    private Long id;
     @Schema(description = "Task title", example = "Write report")
     private String title;
     @Schema(description = "Priority level of the task", example = "MEDIUM")

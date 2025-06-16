@@ -66,6 +66,7 @@ public class TaskServiceImpl implements TaskService{
             tasks = taskRepository.findByUserEmailAndTaskDetailsDeletedFalse(userEmail, pageable);
         }
         return tasks.map(task -> new TaskSummaryResponse(
+                task.getId(),
                 task.getTitle(),
                 task.getTaskDetails().getPriority(),
                 task.getTaskDetails().getStatus()
@@ -77,6 +78,7 @@ public class TaskServiceImpl implements TaskService{
         Pageable pageable = PageRequest.of(page, size);
         Page<Task> deletedTasks = taskRepository.findByUserEmailAndTaskDetails_DeletedTrue(userEmail, pageable);
         return deletedTasks.map(task -> new TaskSummaryResponse(
+                task.getId(),
                 task.getTitle(),
                 task.getTaskDetails().getPriority(),
                 task.getTaskDetails().getStatus()
@@ -93,6 +95,7 @@ public class TaskServiceImpl implements TaskService{
         }
         TaskDetails taskDetails = task.getTaskDetails();
         return TaskDetailsResponse.builder()
+                .id(task.getId())
                 .title(task.getTitle())
                 .description(taskDetails.getDescription())
                 .status(taskDetails.getStatus())

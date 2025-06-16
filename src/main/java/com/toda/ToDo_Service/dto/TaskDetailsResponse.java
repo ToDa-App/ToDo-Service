@@ -12,6 +12,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Schema(name = "TaskDetailsResponse", description = "Response DTO containing full task details")
 public class TaskDetailsResponse {
+    private Long id;
     @Schema(description = "Task title", example = "Plan meeting agenda")
     private String title;
     @Schema(description = "Task description", example = "Discuss quarterly goals and budget allocations")
